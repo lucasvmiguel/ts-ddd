@@ -1,3 +1,5 @@
+import * as express from './express';
+
 export enum Status {
   Success = 200,
   Created = 201,
@@ -43,4 +45,8 @@ export interface IResponse {
 
 export interface IHandlerFn {
   (req: IRequest): IResponse | Promise<IResponse>;
+}
+
+export {
+  express
 }

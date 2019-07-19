@@ -1,15 +1,12 @@
-import * as typeorm from 'typeorm';
-
 import * as http from '../http';
-import * as express from '../http/express';
-
+import * as repository from '../repository';
 import * as user from '../user';
 
 (async () => {
-  const conn = await typeorm.createConnection();
+  const conn = await repository.createConnection();
   const userRepository = conn.getRepository(user.User);
 
-  express.config({
+  http.express.config({
     port: 3000,
     handlers: [
       { method: http.Method.Get, endpoint: '/users/:id', fn: user.handlers.get(userRepository) },

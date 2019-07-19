@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import * as chai from 'chai';
 
 import * as result from './result';
 
@@ -23,28 +23,28 @@ const resultOkEmpty: result.IResult<string> = {
   _error: undefined,
 };
 
-const resultFail1: result.IResult<any> =  {
+const resultFail1: result.IResult<any> = {
   isSuccess: false,
   isFailure: true,
   _value: undefined,
   _error: new Error('test 1'),
 };
 
-const resultFail2: result.IResult<any> =  {
+const resultFail2: result.IResult<any> = {
   isSuccess: false,
   isFailure: true,
   _value: undefined,
   _error: new Error('test 2'),
 };
 
-const resultFailEmpty: result.IResult<any> =  {
+const resultFailEmpty: result.IResult<any> = {
   isSuccess: false,
   isFailure: true,
   _value: undefined,
   _error: new Error(),
 };
 
-describe('Result', () => {
+describe('result util', () => {
   it('ok', () => {
     const tests = [
       {
@@ -61,7 +61,7 @@ describe('Result', () => {
       },
     ];
 
-    tests.map(t => expect(result.ok(t.params)).to.be.deep.equal(t.expected));
+    tests.map(t => chai.expect(result.ok(t.params)).to.be.deep.equal(t.expected));
   });
 
   it('fail', () => {
@@ -80,10 +80,10 @@ describe('Result', () => {
       },
     ];
 
-    tests.map(t => expect(result.fail(t.params).isSuccess).to.be.deep.equal(t.expected.isSuccess));
-    tests.map(t => expect(result.fail(t.params).isFailure).to.be.deep.equal(t.expected.isFailure));
-    tests.map(t => expect(result.fail(t.params)._value).to.be.deep.equal(t.expected._value));
-    tests.map(t => expect(result.fail(t.params)._error.message).to.be.deep.equal(t.expected._error.message));
+    tests.map(t => chai.expect(result.fail(t.params).isSuccess).to.be.deep.equal(t.expected.isSuccess));
+    tests.map(t => chai.expect(result.fail(t.params).isFailure).to.be.deep.equal(t.expected.isFailure));
+    tests.map(t => chai.expect(result.fail(t.params)._value).to.be.deep.equal(t.expected._value));
+    tests.map(t => chai.expect(result.fail(t.params)._error.message).to.be.deep.equal(t.expected._error.message));
   });
 
   it('value', () => {
@@ -103,7 +103,7 @@ describe('Result', () => {
     ];
 
     // @ts-ignore
-    tests.map(t => expect(result.value(t.params)).to.be.deep.equal(t.expected));
+    tests.map(t => chai.expect(result.value(t.params)).to.be.deep.equal(t.expected));
   });
 
   it('value with invalid', () => {
@@ -118,7 +118,7 @@ describe('Result', () => {
       try {
         result.value(t.params);
       } catch (error) {
-        expect(error.message).to.be.deep.equal(t.expected);
+        chai.expect(error.message).to.be.deep.equal(t.expected);
       }
     });
   });
@@ -139,7 +139,7 @@ describe('Result', () => {
       },
     ];
 
-    tests.map(t => expect(result.error(t.params).message).to.be.deep.equal(t.expected.message));
+    tests.map(t => chai.expect(result.error(t.params).message).to.be.deep.equal(t.expected.message));
   });
 
   it('error with invalid', () => {
@@ -154,7 +154,7 @@ describe('Result', () => {
       try {
         result.error(t.params);
       } catch (error) {
-        expect(error.message).to.be.deep.equal(t.expected);
+        chai.expect(error.message).to.be.deep.equal(t.expected);
       }
     });
   });
@@ -167,7 +167,7 @@ describe('Result', () => {
       },
     ];
 
-    tests.map(t => expect(result.combineErrors(...t.params).message).to.be.deep.equal(t.expected.message));
+    tests.map(t => chai.expect(result.combineErrors(...t.params).message).to.be.deep.equal(t.expected.message));
   });
 
   it('checkSuccess', () => {
@@ -186,7 +186,7 @@ describe('Result', () => {
       },
     ];
 
-    tests.map(t => expect(result.checkSuccess(...t.params)).to.be.deep.equal(t.expected));
+    tests.map(t => chai.expect(result.checkSuccess(...t.params)).to.be.deep.equal(t.expected));
   });
 
   it('checkFailure', () => {
@@ -205,6 +205,6 @@ describe('Result', () => {
       },
     ];
 
-    tests.map(t => expect(result.checkFailure(...t.params)).to.be.deep.equal(t.expected));
+    tests.map(t => chai.expect(result.checkFailure(...t.params)).to.be.deep.equal(t.expected));
   });
 });

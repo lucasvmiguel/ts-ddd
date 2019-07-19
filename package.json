@@ -4,7 +4,7 @@
    "description": "",
    "main": "index.js",
    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
+      "test": "mocha --require ts-node/register './{,!(node_modules)/**}/*.spec.ts'",
       "start:api": "ts-node src/cmd/api.ts"
    },
    "author": "",
@@ -18,8 +18,12 @@
       "typescript": "^3.5.3"
    },
    "devDependencies": {
+      "@types/chai": "^4.1.7",
       "@types/express": "^4.17.0",
+      "@types/mocha": "^5.2.7",
       "@types/node": "^8.0.29",
+      "chai": "^4.2.0",
+      "mocha": "^6.2.0",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333"
    }
